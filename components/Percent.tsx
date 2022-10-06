@@ -1,18 +1,34 @@
 import React, { FC } from "react";
 import { Dimensions, Pressable, StyleSheet, Text } from "react-native";
-
-const OperatorButton: FC<{
-  val: string;
-  setOperator: Function;
+const Percent: FC<{
+  first: string | null;
+  second: string | null;
+  operator: string | null;
+  setFirst: Function;
+  setSecond: Function;
   isEnabled: Boolean;
-}> = ({ val, setOperator, isEnabled }) => {
+}> = ({ first, second, operator, setFirst, setSecond, isEnabled }) => {
   // grab dimension
   const screen = Dimensions.get("window");
   const buttonWidth = screen.width / 4.05;
 
+  const handleInput = () => {
+    if (!operator) {
+      if (first === null) {
+        return;
+      } else {
+        setFirst((parseFloat(first) / 100).toString());
+      }
+    } else if (second === null) {
+      return;
+    } else {
+      setSecond((parseFloat(second) / 100).toString());
+    }
+  };
+
   return (
     <Pressable
-      style={[
+      style={() => [
         styles.button,
         isEnabled ? styles.dark : styles.light,
         {
@@ -21,10 +37,12 @@ const OperatorButton: FC<{
           borderRadius: Math.floor(buttonWidth),
         },
       ]}
-      onPress={() => setOperator(val)}
+      onPress={() => {
+        handleInput();
+      }}
     >
       <Text style={[styles.txt, isEnabled ? styles.txtdark : styles.txtlight]}>
-        {val}
+        %
       </Text>
     </Pressable>
   );
@@ -33,7 +51,6 @@ const OperatorButton: FC<{
 const styles = StyleSheet.create({
   button: {
     margin: 0.5,
-    // borderRadius: 100,
   },
   dark: {
     backgroundColor: "#4b31a0",
@@ -42,10 +59,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#c99a60",
   },
   txt: {
-    fontSize: 32,
+    fontSize: 38,
     textAlign: "center",
     alignSelf: "center",
-    padding: "19%",
+    padding: "15%",
   },
   txtdark: {
     color: "#ffffff",
@@ -55,4 +72,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OperatorButton;
+export default Percent;

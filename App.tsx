@@ -1,9 +1,12 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Switch, View, Text } from "react-native";
+import { Dimensions, StyleSheet, Switch, View, Text } from "react-native";
 import { useState } from "react";
 import NumButton from "./components/NumButton";
 import OperatorButton from "./components/OperatorButton";
 import EqualButton from "./components/EqualButton";
+import NegitivePositiveButton from "./components/NegitivePositiveButton";
+import Clearbtn from "./components/Clearbtn";
+import Percent from "./components/Percent";
 
 export default function App() {
   // dark mode toggle
@@ -16,6 +19,22 @@ export default function App() {
   const toggleDarkMode = () => {
     setIsEnabled(!isEnabled);
   };
+  // make num buttons
+  let numBtns = [];
+  for (let i = 9; i > 0; i--) {
+    numBtns.push(
+      <NumButton
+        key={`numbtn${i}`}
+        num={i}
+        first={first}
+        setFirst={setFirst}
+        second={second}
+        setSecond={setSecond}
+        operator={operator}
+        isEnabled={isEnabled}
+      />
+    );
+  }
   return (
     <View
       style={[styles.container, isEnabled ? styles.bgdark : styles.bglight]}
@@ -28,134 +47,110 @@ export default function App() {
       >
         {first} {operator} {second}
       </Text>
-      {/* ////////////// First Row */}
-      <NumButton
-        key={`number7`}
-        num={7}
-        first={first}
-        second={second}
-        setFirst={setFirst}
-        setSecond={setSecond}
-        operator={operator}
-        isEnabled={isEnabled}
-      />
-      <NumButton
-        key={`number8`}
-        num={8}
-        first={first}
-        second={second}
-        setFirst={setFirst}
-        setSecond={setSecond}
-        operator={operator}
-        isEnabled={isEnabled}
-      />
-      <NumButton
-        key={`number9`}
-        num={9}
-        first={first}
-        second={second}
-        setFirst={setFirst}
-        setSecond={setSecond}
-        operator={operator}
-        isEnabled={isEnabled}
-      />
-      <OperatorButton val="/" isEnabled={isEnabled} setOperator={setOperator} />
-      {/* ////////// second row */}
-      <NumButton
-        key={`number4`}
-        num={4}
-        first={first}
-        second={second}
-        setFirst={setFirst}
-        setSecond={setSecond}
-        operator={operator}
-        isEnabled={isEnabled}
-      />
-      <NumButton
-        key={`number5`}
-        num={5}
-        first={first}
-        second={second}
-        setFirst={setFirst}
-        setSecond={setSecond}
-        operator={operator}
-        isEnabled={isEnabled}
-      />
-      <NumButton
-        key={`number6`}
-        num={6}
-        first={first}
-        second={second}
-        setFirst={setFirst}
-        setSecond={setSecond}
-        operator={operator}
-        isEnabled={isEnabled}
-      />
-      <OperatorButton val="*" isEnabled={isEnabled} setOperator={setOperator} />
-      {/* //////// third row */}
-      <NumButton
-        key={`number1`}
-        num={1}
-        first={first}
-        second={second}
-        setFirst={setFirst}
-        setSecond={setSecond}
-        operator={operator}
-        isEnabled={isEnabled}
-      />
-      <NumButton
-        key={`number2`}
-        num={2}
-        first={first}
-        second={second}
-        setFirst={setFirst}
-        setSecond={setSecond}
-        operator={operator}
-        isEnabled={isEnabled}
-      />
-      <NumButton
-        key={`number3`}
-        num={3}
-        first={first}
-        second={second}
-        setFirst={setFirst}
-        setSecond={setSecond}
-        operator={operator}
-        isEnabled={isEnabled}
-      />
-      <OperatorButton val="-" isEnabled={isEnabled} setOperator={setOperator} />
-      {/* fourth row  */}
-      <NumButton
-        key={`number0`}
-        num={0}
-        first={first}
-        second={second}
-        setFirst={setFirst}
-        setSecond={setSecond}
-        operator={operator}
-        isEnabled={isEnabled}
-      />
-      <NumButton
-        key={`number.`}
-        num={"."}
-        first={first}
-        second={second}
-        setFirst={setFirst}
-        setSecond={setSecond}
-        operator={operator}
-        isEnabled={isEnabled}
-      />
-      <EqualButton
-        isEnabled={isEnabled}
-        first={first}
-        setFirst={setFirst}
-        second={second}
-        setSecond={setSecond}
-        operator={operator}
-        setOperator={setOperator}
-      />
-      <OperatorButton val="+" isEnabled={isEnabled} setOperator={setOperator} />
+      <View
+        style={{
+          flexDirection: "column",
+          height: "100%",
+          width: "100%",
+        }}
+      >
+        <View
+          style={{
+            flexDirection: "row",
+            // height: "10%",
+            width: "100%",
+          }}
+        >
+          {/* clear, +/-, % , /   */}
+          <Clearbtn
+            setFirst={setFirst}
+            setSecond={setSecond}
+            setOperator={setOperator}
+            isEnabled={isEnabled}
+          />
+          <NegitivePositiveButton
+            first={first}
+            setFirst={setFirst}
+            second={second}
+            setSecond={setSecond}
+            operator={operator}
+            isEnabled={isEnabled}
+          />
+          <Percent
+            first={first}
+            setFirst={setFirst}
+            second={second}
+            setSecond={setSecond}
+            operator={operator}
+            isEnabled={isEnabled}
+          />
+          <OperatorButton
+            val="/"
+            isEnabled={isEnabled}
+            setOperator={setOperator}
+          />
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            height: "100%",
+            margin: 0,
+          }}
+        >
+          <View style={styles.numpad}>
+            {numBtns}
+            <NumButton
+              key={`numbtn.`}
+              num={"."}
+              first={first}
+              setFirst={setFirst}
+              second={second}
+              setSecond={setSecond}
+              operator={operator}
+              isEnabled={isEnabled}
+            />
+            <NumButton
+              key={`numbtn0`}
+              num={0}
+              first={first}
+              setFirst={setFirst}
+              second={second}
+              setSecond={setSecond}
+              operator={operator}
+              isEnabled={isEnabled}
+            />
+          </View>
+          <View style={styles.opPad}>
+            <OperatorButton
+              val="*"
+              isEnabled={isEnabled}
+              setOperator={setOperator}
+            />
+            <OperatorButton
+              val="-"
+              isEnabled={isEnabled}
+              setOperator={setOperator}
+            />
+            <OperatorButton
+              val="+"
+              isEnabled={isEnabled}
+              setOperator={setOperator}
+            />
+            <EqualButton
+              isEnabled={isEnabled}
+              first={first}
+              setFirst={setFirst}
+              second={second}
+              setSecond={setSecond}
+              operator={operator}
+              setOperator={setOperator}
+            />
+          </View>
+        </View>
+      </View>
+
       <Switch
+        style={styles.switch}
         trackColor={{ false: "#FFFFF", true: "#606060" }}
         thumbColor={isEnabled ? "#4b31a0" : "#c99a60"}
         onValueChange={toggleDarkMode}
@@ -169,11 +164,14 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: "5%",
+    height: "100%",
     alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: "column",
+    top: 25,
+  },
+  switch: {
+    position: "absolute",
+    bottom: "5%",
   },
   bglight: {
     backgroundColor: "#ffffff",
@@ -186,7 +184,8 @@ const styles = StyleSheet.create({
   screen: {
     height: "20%",
     width: "100%",
-    margin: 15,
+    marginTop: 15,
+    marginBottom: 15,
     fontSize: 42,
   },
   screendark: {
@@ -194,5 +193,14 @@ const styles = StyleSheet.create({
   },
   screenlight: {
     backgroundColor: "#BED1C8",
+  },
+  ///// key pad styling
+  numpad: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    width: "75%",
+  },
+  opPad: {
+    height: "10%",
   },
 });

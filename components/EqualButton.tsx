@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Dimensions, Pressable, StyleSheet, Text } from "react-native";
 
 const EqualButton: FC<{
   isEnabled: Boolean;
@@ -18,7 +18,14 @@ const EqualButton: FC<{
   operator,
   setOperator,
 }) => {
+  // grab dimension
+  const screen = Dimensions.get("window");
+  const buttonWidth = screen.width / 4.05;
+
   const equate = () => {
+    if (first === null || second === null) {
+      return;
+    }
     let equals = eval(`${first}  ${operator} ${second}`).toString();
     setFirst(equals);
     setSecond(null);
@@ -26,7 +33,15 @@ const EqualButton: FC<{
   };
   return (
     <Pressable
-      style={[styles.button, isEnabled ? styles.dark : styles.light]}
+      style={[
+        styles.button,
+        isEnabled ? styles.dark : styles.light,
+        {
+          width: buttonWidth,
+          height: Math.floor(buttonWidth - 10),
+          borderRadius: Math.floor(buttonWidth),
+        },
+      ]}
       onPress={equate}
     >
       <Text style={[styles.txt, isEnabled ? styles.txtdark : styles.txtlight]}>
@@ -38,10 +53,8 @@ const EqualButton: FC<{
 
 const styles = StyleSheet.create({
   button: {
-    margin: "1%",
-    borderRadius: 5,
-    width: "20%",
-    height: "10%",
+    margin: 0,
+    // borderRadius: 100,
   },
   dark: {
     backgroundColor: "#4b31a0",
@@ -50,10 +63,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#c99a60",
   },
   txt: {
-    fontSize: 38,
+    fontSize: 32,
     textAlign: "center",
     alignSelf: "center",
-    padding: "5%",
+    padding: "19%",
   },
   txtdark: {
     color: "#ffffff",

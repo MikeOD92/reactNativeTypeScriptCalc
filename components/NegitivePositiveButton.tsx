@@ -1,14 +1,13 @@
 import React, { FC } from "react";
 import { Dimensions, Pressable, StyleSheet, Text } from "react-native";
-const NumButton: FC<{
-  num: number | string;
+const NegitivePositiveButton: FC<{
   first: string | null;
   second: string | null;
   operator: string | null;
   setFirst: Function;
   setSecond: Function;
   isEnabled: Boolean;
-}> = ({ num, first, second, operator, setFirst, setSecond, isEnabled }) => {
+}> = ({ first, second, operator, setFirst, setSecond, isEnabled }) => {
   // grab dimension
   const screen = Dimensions.get("window");
   const buttonWidth = screen.width / 4.05;
@@ -16,19 +15,30 @@ const NumButton: FC<{
   const handleInput = () => {
     if (!operator) {
       if (first === null) {
-        setFirst(num.toString());
+        return;
       } else if (first.length < 6) {
-        setFirst(first + num.toString());
+        if (first[0] !== "-") {
+          setFirst("-" + first);
+        } else {
+          let val = first.split("");
+          val.shift();
+          setFirst(val.join(""));
+        }
       }
     } else if (second === null) {
-      setSecond(num.toString());
+      return;
     } else if (second.length < 6) {
-      setSecond(second + num.toString());
+      if (second[0] !== "-") {
+        setSecond("-" + second);
+      } else {
+        let val = second.split("");
+        val.shift();
+        setSecond(val.join(""));
+      }
     }
   };
   return (
     <Pressable
-      //   title={num.toString()}
       style={() => [
         styles.button,
         isEnabled ? styles.dark : styles.light,
@@ -43,7 +53,7 @@ const NumButton: FC<{
       }}
     >
       <Text style={[styles.txt, isEnabled ? styles.txtdark : styles.txtlight]}>
-        {num}
+        +/ -
       </Text>
     </Pressable>
   );
@@ -73,4 +83,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NumButton;
+export default NegitivePositiveButton;
