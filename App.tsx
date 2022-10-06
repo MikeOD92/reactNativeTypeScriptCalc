@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { Dimensions, StyleSheet, Switch, View, Text } from "react-native";
+import { StyleSheet, Switch, View, Text } from "react-native";
 import { useState } from "react";
 import NumButton from "./components/NumButton";
 import OperatorButton from "./components/OperatorButton";
@@ -57,11 +57,9 @@ export default function App() {
         <View
           style={{
             flexDirection: "row",
-            // height: "10%",
             width: "100%",
           }}
         >
-          {/* clear, +/-, % , /   */}
           <Clearbtn
             setFirst={setFirst}
             setSecond={setSecond}
@@ -152,7 +150,7 @@ export default function App() {
       <Switch
         style={styles.switch}
         trackColor={{ false: "#FFFFF", true: "#606060" }}
-        thumbColor={isEnabled ? "#4b31a0" : "#c99a60"}
+        thumbColor={isEnabled ? "#B8E7B1" : "#c99a60"}
         onValueChange={toggleDarkMode}
         value={isEnabled}
       />
@@ -167,14 +165,14 @@ const styles = StyleSheet.create({
     height: "100%",
     alignItems: "center",
     flexDirection: "column",
-    top: 25,
+    top: 35,
   },
   switch: {
     position: "absolute",
-    bottom: "5%",
+    bottom: "8%",
   },
   bglight: {
-    backgroundColor: "#ffffff",
+    backgroundColor: "#F3D3BD",
     // color: "#000000",
   },
   bgdark: {
@@ -184,15 +182,17 @@ const styles = StyleSheet.create({
   screen: {
     height: "20%",
     width: "100%",
-    marginTop: 15,
     marginBottom: 15,
-    fontSize: 42,
+    padding: 25,
+    fontSize: 32,
   },
   screendark: {
-    backgroundColor: "#815889",
+    backgroundColor: "#6D5F66",
+    color: "#B8E7B1",
   },
   screenlight: {
-    backgroundColor: "#BED1C8",
+    backgroundColor: "#1B2D2A",
+    color: "#CEFF1A",
   },
   ///// key pad styling
   numpad: {

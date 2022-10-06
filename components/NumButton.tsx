@@ -1,6 +1,6 @@
-import React, { FC } from "react";
+import * as React from "react";
 import { Dimensions, Pressable, StyleSheet, Text } from "react-native";
-const NumButton: FC<{
+const NumButton: React.FC<{
   num: number | string;
   first: string | null;
   second: string | null;
@@ -30,7 +30,6 @@ const NumButton: FC<{
     <Pressable
       //   title={num.toString()}
       style={() => [
-        styles.button,
         isEnabled ? styles.dark : styles.light,
         {
           width: buttonWidth,
@@ -50,11 +49,8 @@ const NumButton: FC<{
 };
 
 const styles = StyleSheet.create({
-  button: {
-    margin: 0.5,
-  },
   dark: {
-    backgroundColor: "#4b31a0",
+    backgroundColor: "#4B544F",
   },
   light: {
     backgroundColor: "#c99a60",

@@ -13,7 +13,6 @@ const OperatorButton: FC<{
   return (
     <Pressable
       style={[
-        styles.button,
         isEnabled ? styles.dark : styles.light,
         {
           width: buttonWidth,
@@ -31,15 +30,11 @@ const OperatorButton: FC<{
 };
 
 const styles = StyleSheet.create({
-  button: {
-    margin: 0.5,
-    // borderRadius: 100,
-  },
   dark: {
-    backgroundColor: "#4b31a0",
+    backgroundColor: "#495867",
   },
   light: {
-    backgroundColor: "#c99a60",
+    backgroundColor: "#632B30",
   },
   txt: {
     fontSize: 32,
@@ -51,7 +46,7 @@ const styles = StyleSheet.create({
     color: "#ffffff",
   },
   txtlight: {
-    color: "#000000",
+    color: "#ffffff",
   },
 });
 

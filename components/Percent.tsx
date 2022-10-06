@@ -29,7 +29,6 @@ const Percent: FC<{
   return (
     <Pressable
       style={() => [
-        styles.button,
         isEnabled ? styles.dark : styles.light,
         {
           width: buttonWidth,
@@ -49,11 +48,8 @@ const Percent: FC<{
 };
 
 const styles = StyleSheet.create({
-  button: {
-    margin: 0.5,
-  },
   dark: {
-    backgroundColor: "#4b31a0",
+    backgroundColor: "#4B544F",
   },
   light: {
     backgroundColor: "#c99a60",
