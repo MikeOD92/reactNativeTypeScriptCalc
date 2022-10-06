@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import { Pressable, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 const NumButton: FC<{
-  num: number;
+  num: number | string;
   first: string | null;
   second: string | null;
   operator: string | null;

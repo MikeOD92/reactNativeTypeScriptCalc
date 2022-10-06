@@ -1,18 +1,36 @@
 import React, { FC } from "react";
 import { Pressable, StyleSheet, Text } from "react-native";
 
-const OperatorButton: FC<{
-  val: string;
-  setOperator: Function;
+const EqualButton: FC<{
   isEnabled: Boolean;
-}> = ({ val, setOperator, isEnabled }) => {
+  first: string | null;
+  setFirst: Function;
+  second: string | null;
+  setSecond: Function;
+  operator: string | null;
+  setOperator: Function;
+}> = ({
+  isEnabled,
+  first,
+  setFirst,
+  second,
+  setSecond,
+  operator,
+  setOperator,
+}) => {
+  const equate = () => {
+    let equals = eval(`${first}  ${operator} ${second}`).toString();
+    setFirst(equals);
+    setSecond(null);
+    setOperator(null);
+  };
   return (
     <Pressable
       style={[styles.button, isEnabled ? styles.dark : styles.light]}
-      onPress={() => setOperator(val)}
+      onPress={equate}
     >
       <Text style={[styles.txt, isEnabled ? styles.txtdark : styles.txtlight]}>
-        {val}
+        =
       </Text>
     </Pressable>
   );
@@ -45,4 +63,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OperatorButton;
+export default EqualButton;

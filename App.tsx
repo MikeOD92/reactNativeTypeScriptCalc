@@ -2,6 +2,8 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Switch, View, Text } from "react-native";
 import { useState } from "react";
 import NumButton from "./components/NumButton";
+import OperatorButton from "./components/OperatorButton";
+import EqualButton from "./components/EqualButton";
 
 export default function App() {
   // dark mode toggle
@@ -14,34 +16,6 @@ export default function App() {
   const toggleDarkMode = () => {
     setIsEnabled(!isEnabled);
   };
-  // create number pad
-  const numbers = [];
-  for (let i = 1; i < 10; i++) {
-    numbers.push(
-      <NumButton
-        key={`number${i}`}
-        num={i}
-        first={first}
-        second={second}
-        setFirst={setFirst}
-        setSecond={setSecond}
-        operator={operator}
-        isEnabled={isEnabled}
-      />
-    );
-  }
-  numbers.push(
-    <NumButton
-      key={`number0`}
-      num={0}
-      first={first}
-      second={second}
-      setFirst={setFirst}
-      setSecond={setSecond}
-      operator={operator}
-      isEnabled={isEnabled}
-    />
-  );
   return (
     <View
       style={[styles.container, isEnabled ? styles.bgdark : styles.bglight]}
@@ -54,7 +28,133 @@ export default function App() {
       >
         {first} {operator} {second}
       </Text>
-      {numbers}
+      {/* ////////////// First Row */}
+      <NumButton
+        key={`number7`}
+        num={7}
+        first={first}
+        second={second}
+        setFirst={setFirst}
+        setSecond={setSecond}
+        operator={operator}
+        isEnabled={isEnabled}
+      />
+      <NumButton
+        key={`number8`}
+        num={8}
+        first={first}
+        second={second}
+        setFirst={setFirst}
+        setSecond={setSecond}
+        operator={operator}
+        isEnabled={isEnabled}
+      />
+      <NumButton
+        key={`number9`}
+        num={9}
+        first={first}
+        second={second}
+        setFirst={setFirst}
+        setSecond={setSecond}
+        operator={operator}
+        isEnabled={isEnabled}
+      />
+      <OperatorButton val="/" isEnabled={isEnabled} setOperator={setOperator} />
+      {/* ////////// second row */}
+      <NumButton
+        key={`number4`}
+        num={4}
+        first={first}
+        second={second}
+        setFirst={setFirst}
+        setSecond={setSecond}
+        operator={operator}
+        isEnabled={isEnabled}
+      />
+      <NumButton
+        key={`number5`}
+        num={5}
+        first={first}
+        second={second}
+        setFirst={setFirst}
+        setSecond={setSecond}
+        operator={operator}
+        isEnabled={isEnabled}
+      />
+      <NumButton
+        key={`number6`}
+        num={6}
+        first={first}
+        second={second}
+        setFirst={setFirst}
+        setSecond={setSecond}
+        operator={operator}
+        isEnabled={isEnabled}
+      />
+      <OperatorButton val="*" isEnabled={isEnabled} setOperator={setOperator} />
+      {/* //////// third row */}
+      <NumButton
+        key={`number1`}
+        num={1}
+        first={first}
+        second={second}
+        setFirst={setFirst}
+        setSecond={setSecond}
+        operator={operator}
+        isEnabled={isEnabled}
+      />
+      <NumButton
+        key={`number2`}
+        num={2}
+        first={first}
+        second={second}
+        setFirst={setFirst}
+        setSecond={setSecond}
+        operator={operator}
+        isEnabled={isEnabled}
+      />
+      <NumButton
+        key={`number3`}
+        num={3}
+        first={first}
+        second={second}
+        setFirst={setFirst}
+        setSecond={setSecond}
+        operator={operator}
+        isEnabled={isEnabled}
+      />
+      <OperatorButton val="-" isEnabled={isEnabled} setOperator={setOperator} />
+      {/* fourth row  */}
+      <NumButton
+        key={`number0`}
+        num={0}
+        first={first}
+        second={second}
+        setFirst={setFirst}
+        setSecond={setSecond}
+        operator={operator}
+        isEnabled={isEnabled}
+      />
+      <NumButton
+        key={`number.`}
+        num={"."}
+        first={first}
+        second={second}
+        setFirst={setFirst}
+        setSecond={setSecond}
+        operator={operator}
+        isEnabled={isEnabled}
+      />
+      <EqualButton
+        isEnabled={isEnabled}
+        first={first}
+        setFirst={setFirst}
+        second={second}
+        setSecond={setSecond}
+        operator={operator}
+        setOperator={setOperator}
+      />
+      <OperatorButton val="+" isEnabled={isEnabled} setOperator={setOperator} />
       <Switch
         trackColor={{ false: "#FFFFF", true: "#606060" }}
         thumbColor={isEnabled ? "#4b31a0" : "#c99a60"}
@@ -87,6 +187,7 @@ const styles = StyleSheet.create({
     height: "20%",
     width: "100%",
     margin: 15,
+    fontSize: 42,
   },
   screendark: {
     backgroundColor: "#815889",
